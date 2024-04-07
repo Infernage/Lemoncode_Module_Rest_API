@@ -11,15 +11,16 @@ import {useNavigate} from "react-router-dom";
 
 interface Props {
   character: Character;
+  onSave: (character: Character) => void;
 }
 
 export const CharacterComponent: React.FunctionComponent<Props> = (props) => {
-  const { character } = props;
+  const { character, onSave } = props;
   const navigate = useNavigate();
 
   return (
     <Formik
-      onSubmit={() => {}}
+      onSubmit={onSave}
       initialValues={character}
       enableReinitialize={true}
       validate={formValidation.validateForm}
@@ -31,7 +32,9 @@ export const CharacterComponent: React.FunctionComponent<Props> = (props) => {
           <TextFieldComponent name="status" label="Status" />
           <TextFieldComponent name="species" label="Species" />
           <TextFieldComponent name="gender" label="Gender" />
-          <Button type="button" variant="contained" color="primary" onClick={() => navigate(-1)}>
+          <TextFieldComponent name="bestSentences" label="Best sentences" />
+          <Button type="submit" variant="contained" color="primary">Save</Button>
+          <Button type="button" variant="contained" color="inherit" onClick={() => navigate(-1)}>
             Back
           </Button>
         </Form>
